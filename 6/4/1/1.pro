@@ -7,3 +7,6 @@ QMAKE_CXXFLAGS += -std=c++20
 
 SOURCES += \
         main.cpp
+
+HEADERS += \
+    getNumber.h

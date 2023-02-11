@@ -1,14 +1,8 @@
 #include <iostream>
+#include "getNumber.h"
 #include <tuple>
 
 using namespace std;
-
-auto getNumber(const char * message){
-    cout << message;
-    int n{};
-    cin >> n;
-    return n;
-}
 
 auto larger{getNumber("Enter a larger number: ")};
 auto smaller{getNumber("Enter a smaller number: ")};
