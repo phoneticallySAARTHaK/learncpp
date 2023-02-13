@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 #include <limits>
+#include <string>
 
 using namespace std;
 
@@ -13,26 +14,44 @@ const int maxTrials = 7;
 
 }
 
+auto clearCin() {
+    if (!cin) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
 auto initialize() {
     static mt19937 mt{};
     seed_seq s1{random_device{}()};
     mt.seed(s1);
     mt.discard(100);
 
-    return uniform_int_distribution{constants::min, constants::max}(mt);
+    return uniform_int_distribution(constants::min, constants::max)(mt);
 }
 
 auto takeGuess(auto trials) {
-    cout << "Guess #" << trials + 1 << ": ";
-    int n{};
-    cin >> n;
-    return n;
+
+    while (true) {
+        cout << "Guess #" << trials + 1 << ": ";
+
+        int n{};
+        cin >> n;
+
+        if (cin && n >= constants::min && n <= constants::max) {
+            return n;
+        }
+
+        cerr << "Enter a number between " << constants::min << " and " << constants::max << ".\n\n";
+        clearCin();
+
+    }
 }
 
 auto isCorrect(auto rand, auto guess) {
 
     if (rand == guess) {
-        cout << "Correct! You win.\n";
+        cout << "Correct! You win!.\n";
         return true;
     }
 
@@ -56,12 +75,6 @@ auto play(auto randomNumber) {
     cout << "Sorry, you ran out of guesses. The correct number was " << randomNumber << ".\n";
 }
 
-auto clearCin() {
-    if (!cin) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-}
 
 auto restart() {
     string inp{};
