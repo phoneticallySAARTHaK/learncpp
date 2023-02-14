@@ -1,29 +1,18 @@
 #include <iostream>
 
-namespace constants
+void print(long x)
 {
-    inline constexpr double pi { 3.14159 };
+    std::cout << "long " << x << '\n';
 }
 
-using constants::pi;
-using std::cout;
-using std::cin;
-using Radian = double;
-using Degree = double;
-
-Radian convertToRadians(Degree degrees)
+void print(double x)
 {
-    return degrees * pi / 180;
+    std::cout << "double " << x << '\n';
 }
 
 int main()
 {
-    cout << "Enter a number of degrees: ";
-    Degree degrees{};
-    cin >> degrees;
-
-    Radian radians { convertToRadians(degrees) };
-    cout << degrees << " degrees is " << radians << " radians.\n";
+    print(5);
 
     return 0;
 }
