@@ -5,13 +5,19 @@ using namespace std;
 
 int main()
 {
-    int array[]{ 6, 3, 2, 9, 7, 1, 5, 4, 8 };
+    int array[]{ 6, 3, 2, 1, 5, 4, 8, 7, 9 };
 
-    for ([[maybe_unused]] const auto el : array) {
-        for (int inner{}; inner < ssize(array) - 1; ++inner) {
+    for (int outer{1}; outer < ssize(array); ++outer){
+        bool swapped{false};
+        for (int inner{}; inner < ssize(array) - outer; ++inner) {
             if (array[inner + 1] < array[inner]) {
+                swapped = true;
                 swap(array[inner], array[inner + 1]);
             }
+        }
+        if (!swapped) {
+            // already sorted;
+            break;
         }
     }
 
